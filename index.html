@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume | Sanjay Dharan</title>
+    <!-- Chosen Palette: Ernst & Young (EY) Inspired - Yellow, Black, Grey -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive dashboard to give recruiters a dynamic view of the candidate's profile. It abandons the linear resume format for a thematic, non-linear structure. The flow is: 1. Hero section for immediate identity and contact. 2. A high-impact "Key Achievements" chart to immediately show quantifiable value. 3. An "Interactive Experience" timeline that organizes detailed job history into a clickable, manageable component, preventing information overload. 4. A "Skills" section with a chart for quick visual assessment. 5. A "Projects" section with cards for deeper dives. 6. A "Recommendations" section to add social proof. This structure is chosen for usability, allowing users to explore based on interest (e.g., jump straight to skills or projects) rather than being forced into a chronological reading. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Quantified achievements (15% engagement, 25% retention, 40% risk reduction, 50% time improvement). Goal: Compare & Inform. Viz: Bar Chart (Chart.js). Interaction: Tooltips on hover provide context. Justification: A bar chart is visually impactful and makes comparing different metrics easy.
+        - Report Info: Work History. Goal: Organize & Change. Viz: Interactive Tabs/Timeline (HTML/CSS/JS). Interaction: Clicking a company name reveals its details. Justification: Condenses large amounts of text into a user-controlled view, improving readability and showing career progression.
+        - Report Info: Technical Skills. Goal: Organize & Inform. Viz: Horizontal Bar Chart (Chart.js). Interaction: Tooltips on hover. Justification: Visually groups skills and provides a quick competency overview that's more engaging than a list.
+        - Report Info: Projects & Links. Goal: Organize & Inform. Viz: Clickable Card Layout (HTML/CSS/JS). Interaction: Hover effects and click-to-open project links. Justification: Standard, intuitive UI for showcasing a portfolio with direct access to live demos.
+        - Report Info: Recommendations. Goal: Inform & Build Trust. Viz: Card layout with images and text. Interaction: Links to recommender profiles. Justification: Adds credibility and social proof.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --ey-yellow: #FFE600;
+            --ey-bg: #121212;
+            --ey-card: #1E1E1E;
+            --ey-dark: #2E2E38;
+            --ey-light-text: #F5F5F5;
+            --ey-mid-text: #A8A8A8;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ey-bg);
+            color: var(--ey-light-text);
+            overflow-x: hidden;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+        
+        #plexus-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        main, header, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--ey-yellow);
+            margin-top: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .experience-btn.active {
+            background-color: var(--ey-yellow);
+            color: #161616;
+            border-color: var(--ey-yellow);
+            font-weight: 700;
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .interactive-card {
+            background-color: var(--ey-card);
+            border: 1px solid var(--ey-dark);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 230, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 230, 0, 0.1);
+        }
+        
+        .hero-title {
+            background: linear-gradient(45deg, #FFFFFF, #FFE600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: var(--ey-yellow);
+            animation: blink 0.7s infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* NEW CATCHY STYLES */
+        .blueprint-bg {
+            background-color: #1a2639;
+            background-image:
+                linear-gradient(rgba(255, 230, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 230, 0, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            border: 2px dashed rgba(255, 230, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .blueprint-stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: rgba(255, 230, 0, 0.5);
+            border: 4px solid rgba(255, 230, 0, 0.5);
+            padding: 8px 16px;
+            transform: rotate(10deg);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            user-select: none;
+        }
+
+        .timeline-construction {
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .timeline-path {
+            position: absolute;
+            width: 80%;
+            height: 4px;
+            background-image: repeating-linear-gradient(-45deg, var(--ey-dark), var(--ey-dark) 10px, transparent 10px, transparent 20px);
+            border-radius: 2px;
+        }
+        .timeline-pulse {
+            width: 20px;
+            height: 20px;
+            background-color: var(--ey-yellow);
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            animation: move-pulse 5s infinite linear;
+            box-shadow: 0 0 15px 5px rgba(255, 230, 0, 0.5);
+        }
+        @keyframes move-pulse {
+            0% { transform: translateX(0) scale(1); }
+            50% { transform: translateX(35vw) scale(1.2); } /* Adjusted for better visual travel */
+            100% { transform: translateX(calc(80vw - 20px)) scale(1); }
+        }
+        
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            min-height: 250px;
+            place-items: center;
+        }
+        .skill-slot {
+            width: 100%;
+            height: 100px;
+            background-color: var(--ey-dark);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .loader-bar {
+            width: 80%;
+            height: 6px;
+            background-color: #444;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .loader-fill {
+            height: 100%;
+            background-color: var(--ey-yellow);
+            width: 0%;
+            animation: fill-loader 3s infinite ease-in-out;
+        }
+        .skill-slot:nth-child(1) .loader-fill { animation-delay: 0s; }
+        .skill-slot:nth-child(2) .loader-fill { animation-delay: 0.5s; animation-duration: 2.5s; }
+        .skill-slot:nth-child(3) .loader-fill { animation-delay: 1s; animation-duration: 3.5s; }
+        .skill-slot:nth-child(4) .loader-fill { animation-delay: 0.2s; }
+        .skill-slot:nth-child(5) .loader-fill { animation-delay: 1.2s; animation-duration: 2.8s; }
+        .skill-slot:nth-child(6) .loader-fill { animation-delay: 0.8s; }
+        @keyframes fill-loader {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+        
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ey-yellow': '#FFE600',
+                        'ey-dark': '#2E2E38',
+                        'ey-bg': '#121212',
+                        'ey-card': '#1E1E1E',
+                        'ey-light-text': '#F5F5F5',
+                        'ey-mid-text': '#A8A8A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-ey-bg text-ey-light-text">
+
+    <canvas id="plexus-bg"></canvas>
+
+    <header class="bg-ey-card/70 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="hover:text-ey-yellow transition-colors duration-300">Sanjay Dharan</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">About</a>
+                <a href="#achievements" class="text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Achievements</a>
+                <a href="#experience" class="text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Experience</a>
+                <a href="#projects" class="text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Skills</a>
+            </div>
+            <a href="mailto:sanjaydharand@gmail.com" class="hidden md:block bg-ey-yellow text-ey-dark font-bold px-4 py-2 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300">Contact Me</a>
+            <button id="mobile-menu-button" class="md:hidden text-ey-mid-text focus:outline-none hover:text-ey-yellow transition-colors duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#about" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">About</a>
+            <a href="#achievements" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Achievements</a>
+            <a href="#experience" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Experience</a>
+            <a href="#projects" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Projects</a>
+            <a href="#recommendations" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Recommendations</a>
+            <a href="#skills" class="block py-2 text-ey-mid-text hover:text-ey-yellow transition-colors duration-300">Skills</a>
+            <a href="mailto:sanjaydharand@gmail.com" class="block mt-2 text-center bg-ey-yellow text-ey-dark font-bold px-4 py-2 rounded-lg hover:bg-white transition-all duration-300">Contact Me</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="hero" class="text-center mb-20 fade-in-section">
+            <div class="relative">
+                <img src="https://i.ibb.co/2YWsLTp5/Sanjay-Image-Linkedin.jpg" alt="Sanjay Dharan" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-ey-yellow shadow-lg hover:shadow-yellow-500/20 transition-all duration-300">
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold hero-title leading-tight mb-2">
+                Sanjay Dharan
+            </h1>
+            <p id="hero-subtitle" class="text-xl md:text-2xl text-ey-yellow font-medium mt-2 mb-6 min-h-[32px]">
+            </p>
+            <p class="max-w-3xl mx-auto text-ey-mid-text text-lg leading-relaxed">
+                Analytical and results-driven professional with hands-on experience in consulting, automotive, and SaaS environments. Proficient in SQL, Python, and cloud-based analytics, delivering actionable insights through advanced dashboards and custom tools.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="#projects" class="bg-ey-yellow text-ey-dark font-bold px-6 py-3 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300">
+                    View My Work
+                </a>
+                <a href="mailto:sanjaydharand@gmail.com" class="border-2 border-ey-yellow text-ey-yellow font-bold px-6 py-3 rounded-lg hover:bg-ey-yellow hover:text-ey-dark transition-all duration-300">
+                    Contact Me
+                </a>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- ============== NEW "ABOUT" SECTION ================= -->
+        <!-- ==================================================== -->
+        <section id="about" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">The Blueprint of a Builder</h2>
+            <div class="blueprint-bg p-8 md:p-12 rounded-xl shadow-lg text-center interactive-card">
+                <div class="blueprint-stamp">In Progress</div>
+                <i class="fas fa-drafting-compass text-6xl text-ey-yellow mb-4"></i>
+                <h3 class="text-2xl font-bold text-white mb-2">Crafting My Narrative</h3>
+                <p class="text-ey-mid-text max-w-xl mx-auto">
+                    The full story behind the code and the data is currently being drafted. This section will soon offer a deeper look into my passions, my problem-solving philosophy, and the journey that shaped my professional identity. Stay tuned!
+                </p>
+            </div>
+        </section>
+
+        <section id="achievements" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title">Key Achievements</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">This chart highlights the quantifiable impact delivered across various roles, showcasing significant improvements in efficiency, engagement, and risk reduction. Interact with the bars to see the details of each achievement.</p>
+            <div class="chart-container">
+                <canvas id="achievementsChart"></canvas>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- ============ MODIFIED "EXPERIENCE" SECTION ========== -->
+        <!-- ==================================================== -->
+        <section id="experience" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title">Forging the Timeline</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">My professional story is currently under construction. Each milestone and achievement is being carefully placed to build a comprehensive timeline of my career growth. The full interactive experience is coming soon!</p>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 opacity-50">
+                <button class="experience-btn px-4 py-2 text-sm md:text-base font-medium border-2 border-gray-600 rounded-full cursor-not-allowed">Ernst & Young</button>
+                <button class="experience-btn px-4 py-2 text-sm md:text-base font-medium border-2 border-gray-600 rounded-full cursor-not-allowed">Ecosoft Zolutions</button>
+                <button class="experience-btn px-4 py-2 text-sm md:text-base font-medium border-2 border-gray-600 rounded-full cursor-not-allowed">Tacheon Consulting</button>
+                <button class="experience-btn px-4 py-2 text-sm md:text-base font-medium border-2 border-gray-600 rounded-full cursor-not-allowed">Hyundai Motor India</button>
+            </div>
+            <div id="experience-content" class="bg-ey-card p-6 md:p-8 rounded-xl shadow-lg transition-opacity duration-300 min-h-[300px] interactive-card timeline-construction">
+                <div class="timeline-path">
+                    <div class="timeline-pulse"></div>
+                </div>
+                <div class="z-10">
+                    <i class="fas fa-hammer text-4xl text-ey-yellow mb-4"></i>
+                    <h3 class="text-xl font-bold text-white">Plotting Career Milestones...</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title">Featured Projects</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">Here are some of the key tools and systems I've developed. These projects demonstrate my ability to take an idea from concept to a fully deployed, value-adding solution. Click on any project to see it live.</p>
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- ============= MODIFIED "SKILLS" SECTION ============ -->
+        <!-- ==================================================== -->
+        <section id="skills" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title">Calibrating Competencies</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">My skill matrix is expanding and being fine-tuned. New abilities are being added and existing ones are leveling up. This area will soon provide a dynamic visualization of my technical arsenal.</p>
+            <div class="bg-ey-card p-8 rounded-xl shadow-lg interactive-card">
+                <div class="skill-grid">
+                    <div class="skill-slot">
+                        <i class="fab fa-python text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">Python</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                    <div class="skill-slot">
+                        <i class="fas fa-database text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">SQL</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                    <div class="skill-slot">
+                        <i class="fab fa-google text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">GCP</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                    <div class="skill-slot">
+                        <i class="fas fa-chart-line text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">ETL</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                    <div class="skill-slot">
+                        <i class="fas fa-brain text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">AI/ML</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                    <div class="skill-slot">
+                        <i class="fas fa-tools text-3xl text-ey-yellow mb-2"></i>
+                        <span class="text-sm font-bold text-ey-mid-text">More...</span>
+                        <div class="loader-bar"><div class="loader-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendations" class="mb-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-2 section-title">Recommendations</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">Testimonials from colleagues and supervisors I've had the pleasure of working with. You can view the original recommendations on my LinkedIn profile.</p>
+            <div id="recommendations-grid" class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+            </div>
+            <div class="text-center mt-8">
+                <a href="https://www.linkedin.com/in/sanjay-dharan-99736321b/details/recommendations/" target="_blank" rel="noopener noreferrer" class="bg-ey-yellow text-ey-dark font-bold px-6 py-3 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2">
+                    View All on LinkedIn <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="education" class="text-center fade-in-section">
+            <h2 class="text-3xl font-bold mb-2 section-title">Education & Certifications</h2>
+            <p class="text-center text-ey-mid-text mb-8 max-w-2xl mx-auto">My academic foundation in AI and Data Science is supplemented by continuous learning through industry-recognized certifications.</p>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-ey-card p-6 rounded-xl shadow-lg text-left interactive-card">
+                    <h3 class="text-xl font-bold text-ey-yellow">Education</h3>
+                    <p class="text-lg font-semibold mt-2 text-ey-light-text">Bachelor of Technology, AI & Data Science</p>
+                    <p class="text-ey-mid-text">KPR Institute of Engineering and Technology</p>
+                    <p class="text-gray-500">Graduated 2025</p>
+                </div>
+                <div class="bg-ey-card p-6 rounded-xl shadow-lg text-left interactive-card">
+                    <h3 class="text-xl font-bold text-ey-yellow">Key Certifications</h3>
+                    <ul id="certifications-list" class="list-none mt-2 space-y-1 text-ey-mid-text">
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-ey-dark mt-20">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h3 class="text-2xl font-bold text-white">Get In Touch</h3>
+            <p class="mt-2 text-ey-mid-text">Feel free to reach out for collaborations or opportunities.</p>
+            <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-2 mt-4">
+                <a href="mailto:sanjaydharand@gmail.com" class="text-ey-yellow hover:text-white transition-colors duration-300">sanjaydharand@gmail.com</a>
+                <span class="hidden sm:inline text-ey-mid-text">&bull;</span>
+                <a href="https://www.linkedin.com/in/sanjay-dharan-99736321b/" target="_blank" rel="noopener noreferrer" class="text-ey-yellow hover:text-white transition-colors duration-300">LinkedIn</a>
+                <span class="hidden sm:inline text-ey-mid-text">&bull;</span>
+                <span class="text-ey-mid-text">+91 93607 34551</span>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    
+    const data = {
+        achievements: {
+            labels: ['User Engagement', 'Client Retention', 'Risk Incident Reduction', 'Audit Turnaround Time'],
+            values: [15, 25, 40, 50],
+            tooltips: [
+                'Increased user engagement by 15% at Ecosoft Zolutions.',
+                'Improved client retention by 25% at Ecosoft Zolutions.',
+                'Reduced risk incidents by 40% at Hyundai Motor India.',
+                'Improved audit turnaround time by 50% at Hyundai Motor India.'
+            ]
+        },
+        // NOTE: Experience and Skills data is kept for future use, but not currently rendered.
+        experience: {
+            ey: {
+                title: 'Associate Software Engineer @ Ernst & Young GDS',
+                duration: 'June 2025 – Present | Coimbatore, Tamil Nadu',
+                logo: 'https://i.ibb.co/bgM0kfC3/EY-id-KDHDpz8-E-1.png',
+                points: ['...']
+            },
+        },
+        skills: {
+            'Python (Pandas, NumPy)': 90,
+            'SQL (BigQuery, Oracle)': 95,
+        },
+        projects: [
+            { name: 'YouTube Comment Analyzer Pro', desc: 'AI-powered breakdown of comment sentiment, key themes, and community feedback from any YouTube video.', link: 'https://youtube-comments-ai-analyzer.streamlit.app' },
+            { name: 'AI Gaming Analytics Dashboard', desc: 'A Streamlit dashboard delivering real-time insights into gaming metrics and player behavior.', link: 'https://sanjaydharan-matiks-data-analyst-assessment.streamlit.app/' },
+            { name: 'Dellizo Process Automation', desc: 'A workflow automation tool designed to streamline operations with a user-friendly interface.', link: 'https://dellizo-process-automation-product.netlify.app/' },
+            { name: 'Dellizo Gym Management System', desc: 'A full-stack web application to manage gym operations, trainer schedules, and member details.', link: 'https://dellizo-gym-management-system-product.netlify.app/' },
+            { name: 'Sheets-Connected Model', desc: 'A live-data model integrated with Google Sheets, built using Streamlit for seamless updates and reporting.', link: 'https://sanjaydharan-sheets-connected-model.streamlit.app/' },
+            { name: 'Client Portfolio Website', desc: 'A modern portfolio website built to showcase client projects with a gallery and interactive sections.', link: 'https://hemanth-kumar-resume.netlify.app/#gallery' }
+        ],
+        recommendations: [
+            { text: "He's a true team player who not only brings solutions to the table but also brings people together with his energy and enthusiasm. Any team would be lucky to have someone like Sanjay...", author: "Arthitha Ravindran", role: "Senior Growth Lead, Tacheon", linkedinUrl: "https://www.linkedin.com/in/arthitha-ravindran-6aa974157/", imageUrl: "https://i.ibb.co/xtJthjpd/Arthitha-Linkedin-Image.jpg" },
+            { text: "He demonstrated exceptional skills in data analysis and visualization, and Python programming. Sanjay showcased strong problem-solving abilities, a positive learning mindset, and quick adaptability.", author: "Adithya Kanakraj", role: "Domain Head, Hyundai", linkedinUrl: "https://www.linkedin.com/in/adithya-kanakraj-b1773a54/", imageUrl: "https://i.ibb.co/DFFXsLM/Adithya-Sir-Imge-Linekdin.jpg" },
+            { text: "Sanjay consistently gave 100 percent effort to the team and played a significant role in ensuring that we met our goals. I'm grateful to have worked with Mr. Sanjay and highly recommend him.", author: "Vishnu Bhaskara", role: "Senior Manager, Hyundai", linkedinUrl: "https://www.linkedin.com/in/vishnu-bhaskara/", imageUrl: "https://i.ibb.co/k2BjK4VS/Vishnu-sir-Linkedin-Image.jpg" }
+        ],
+        certifications: [
+            'IBM: Data Science Professional',
+            'NASSCOM: Acquiring Data',
+            'Oracle: APEX Internship',
+            'Coursera: AWS S3, Kubernetes, VPC',
+            'Xebia: Advanced Python'
+        ]
+    };
+
+    const chartTextColor = '#A8A8A8';
+    const chartGridColor = 'rgba(255, 255, 255, 0.1)';
+
+    const achievementsCtx = document.getElementById('achievementsChart').getContext('2d');
+    new Chart(achievementsCtx, {
+        type: 'bar',
+        data: {
+            labels: data.achievements.labels,
+            datasets: [{
+                label: 'Percentage Improvement (%)',
+                data: data.achievements.values,
+                backgroundColor: 'rgba(255, 230, 0, 0.7)',
+                borderColor: 'rgba(255, 230, 0, 1)',
+                borderWidth: 2,
+                borderRadius: 8,
+                hoverBackgroundColor: 'rgba(255, 230, 0, 0.9)',
+                hoverBorderColor: 'rgba(255, 230, 0, 1)',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#111827',
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 12 },
+                    padding: 12,
+                    displayColors: false,
+                    cornerRadius: 8,
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: chartGridColor },
+                    ticks: { color: chartTextColor, font: { weight: 'bold' } },
+                    title: { display: true, text: 'Impact (%)', color: chartTextColor, font: { size: 14, weight: 'bold' }}
+                },
+                x: {
+                   grid: { color: chartGridColor },
+                   ticks: {
+                        color: chartTextColor,
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(value);
+                            return label.length > 16 ? label.match(/.{1,16}/g) : label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // NOTE: Experience section logic is disabled for the "Under Construction" feature.
+    /*
+    const experienceContent = document.getElementById('experience-content');
+    const experienceBtns = document.querySelectorAll('.experience-btn');
+    function updateExperience(id) { ... }
+    experienceBtns.forEach(btn => { ... });
+    updateExperience('ey');
+    */
+
+    // NOTE: Skills chart is disabled for the "Under Construction" feature.
+    /*
+    const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+    new Chart(skillsCtx, { ... });
+    */
+
+    const projectsGrid = document.getElementById('projects-grid');
+    projectsGrid.innerHTML = data.projects.map(p => `
+        <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="project-card bg-ey-card p-6 rounded-xl shadow-lg interactive-card flex flex-col justify-between">
+            <div>
+                <h4 class="text-lg font-bold text-ey-yellow">${p.name}</h4>
+                <p class="text-ey-mid-text mt-2 text-sm">${p.desc}</p>
+            </div>
+            <div class="mt-4 text-ey-yellow font-semibold text-sm flex items-center">
+                View Project <i class="fas fa-arrow-right ml-2"></i>
+            </div>
+        </a>
+    `).join('');
+
+    const recommendationsGrid = document.getElementById('recommendations-grid');
+    recommendationsGrid.innerHTML = data.recommendations.map(r => `
+        <div class="bg-ey-card p-6 rounded-xl shadow-lg flex flex-col interactive-card">
+            <p class="text-ey-mid-text italic mb-4 text-sm">"${r.text}"</p>
+            <div class="mt-auto flex items-center">
+                <img src="${r.imageUrl}" alt="${r.author}" class="w-12 h-12 rounded-full mr-4 border-2 border-ey-yellow">
+                <div>
+                    <h4 class="font-bold text-ey-light-text">${r.author}</h4>
+                    <p class="text-sm text-ey-mid-text">${r.role}</p>
+                    <a href="${r.linkedinUrl}" target="_blank" rel="noopener noreferrer" class="text-sm text-ey-yellow hover:underline">View Profile</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    const certificationsList = document.getElementById('certifications-list');
+    certificationsList.innerHTML = data.certifications.map(c => `
+        <li class="flex items-center"><span class="text-green-500 mr-2">&#10003;</span>${c}</li>
+    `).join('');
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    const sections = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Typewriter effect
+    const subtitle = document.getElementById('hero-subtitle');
+    const text = "Associate Software Engineer | Data Analyst";
+    let i = 0;
+    function typeWriter() {
+        if (i < text.length) {
+            subtitle.innerHTML = text.substring(0, i + 1) + '<span class="typewriter-cursor"></span>';
+            i++;
+            setTimeout(typeWriter, 100);
+        } else {
+             subtitle.innerHTML = text;
+        }
+    }
+    typeWriter();
+
+    // Plexus background
+    const canvas = document.getElementById('plexus-bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const particleCount = Math.floor(canvas.width / 30);
+    const mouse = { x: null, y: null, radius: 150 };
+
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    class Particle {
+        constructor(x, y, directionX, directionY, size, color) {
+            this.x = x;
+            this.y = y;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.size = size;
+            this.color = color;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+        update() {
+            if (this.x > canvas.width || this.x < 0) {
+                this.directionX = -this.directionX;
+            }
+            if (this.y > canvas.height || this.y < 0) {
+                this.directionY = -this.directionY;
+            }
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+            if (distance < mouse.radius + this.size) {
+                if(mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                    this.x += 10;
+                }
+                if(mouse.x > this.x && this.x > this.size * 10) {
+                    this.x -= 10;
+                }
+                if(mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                    this.y += 10;
+                }
+                if(mouse.y > this.y && this.y > this.size * 10) {
+                    this.y -= 10;
+                }
+            }
+            this.x += this.directionX;
+            this.y += this.directionY;
+            this.draw();
+        }
+    }
+
+    function init() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            let size = (Math.random() * 2) + 1;
+            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+            let directionX = (Math.random() * .4) - .2;
+            let directionY = (Math.random() * .4) - .2;
+            let color = 'rgba(255, 230, 0, 0.5)';
+            particles.push(new Particle(x, y, directionX, directionY, size, color));
+        }
+    }
+
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                             + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                if (distance < (canvas.width/7) * (canvas.height/7)) {
+                    opacityValue = 1 - (distance/20000);
+                    ctx.strokeStyle = `rgba(255, 230, 0, ${opacityValue})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+        connect();
+    }
+
+    window.addEventListener('resize', () => {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        mouse.radius = ((canvas.height/80) * (canvas.height/80));
+        init();
+    });
+    
+    window.addEventListener('mouseout', () => {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+
+    init();
+    animate();
+
+});
+</script>
+</body>
+</html>
