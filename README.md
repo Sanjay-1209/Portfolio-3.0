@@ -1,32 +1,20 @@
-# Sanjay Dharan — Portfolio
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-A premium, Ting-inspired personal portfolio built with Next.js 14, TypeScript, Tailwind CSS and Framer Motion.
+# Run and deploy your AI Studio app
 
-## Getting started
+This contains everything you need to run your app locally.
 
-```bash
-npm install
-npm run dev
-```
+View your app in AI Studio: https://ai.studio/apps/4f68350d-0dc7-423d-831f-a1ba8e88353c
 
-Open http://localhost:3000
+## Run Locally
 
-## Build for production
+**Prerequisites:**  Node.js
 
-```bash
-npm run build
-npm run start
-```
 
-## Structure
-
-- `src/app` — routes: `/`, `/about`, `/experience`, `/work`, `/recommendations`, `/contact`
-- `src/components` — all UI components (Hero, ImpactMetrics, SkillsMatrix, ExperienceTimeline, ProjectStory, RecommendationCard, TingTransition, etc.)
-- `src/data` — all structured content (profile, experience, projects, skills, recommendations). Edit these files to update any content on the site.
-
-## Notes
-
-- Fonts (Space Grotesk, DM Sans) are self-hosted via @fontsource, so the build works fully offline — no dependency on Google Fonts at build time.
-- Profile and recommendation images load from their original remote URLs (ibb.co, LinkedIn CDN) with an automatic initials-avatar fallback if a URL ever expires.
-- Respects prefers-reduced-motion throughout (particle background, counters, reveal animations).
-- Deploy anywhere that supports Next.js (Vercel, Netlify, etc.). If deploying to Netlify, use the Next.js Runtime plugin (auto-detected).
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
