@@ -1,0 +1,8 @@
+# Netlify configuration for this Vite + React portfolio.
+# This project is NOT a Next.js application.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
