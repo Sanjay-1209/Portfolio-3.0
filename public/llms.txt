@@ -1,0 +1,43 @@
+# Sanjay Dharan — Portfolio Summary
+
+Canonical website: https://sanjay-dharan.netlify.app/
+Location: Chennai, Tamil Nadu, India / Remote
+LinkedIn: https://www.linkedin.com/in/sanjay-dharan-99736321b/
+Contact: sanjaydharand@gmail.com
+
+## Short summary
+Sanjay Dharan is a Website Developer, Data Analyst, Data Engineer and Automation Specialist with 2+ years of production experience. He builds responsive websites, analytics and BI dashboards, data engineering pipelines, automation workflows, quotation systems and custom internal business tools.
+
+## Priority commercial service
+End-to-End Responsive Web Development: information architecture, responsive UI/UX, React + TypeScript development, SEO foundations, lead capture and WhatsApp flows, performance optimization, QA, deployment and ongoing production readiness.
+
+## Live website evidence
+- Flora Farming — https://www.florafarming.in/ — production microgreens, subscriptions and B2B platform.
+- Uyirveda Health Care — https://uyirveda.in/ — Ayurvedic clinic, healthcare information and consultation portal.
+More digital projects are in progress and may be added later.
+
+## Enterprise experience
+Sanjay has professional experience across EY GDS, Tacheon and Hyundai. Portfolio outcomes include a 15% pipeline velocity increase, 20% conversion improvement, 30% cloud query cost reduction, 40% reduction in recurring data-preparation effort and 50% reduction in audit review cycles.
+
+## Core services
+1. End-to-End Responsive Web Development
+2. Data Analytics & Business Intelligence
+3. Executive & Operational Dashboards
+4. Data Engineering & ETL Pipelines
+5. Business Process Automation
+6. Database Design & Data Modeling
+7. Data Cleaning & Quality
+8. Reporting and Excel Automation
+9. Automated Quotation & Proposal Systems
+10. Custom Internal Tools
+11. API Integration
+12. Analytics Consulting & KPI Architecture
+
+## Technologies
+React, TypeScript, Tailwind CSS, Python, SQL, Tableau, Power BI, Streamlit, BigQuery, databases, APIs, ETL/data pipelines and automation tooling.
+
+## Who should work with Sanjay
+Startups, founders, SMEs, agencies, healthcare businesses, D2C brands, e-commerce teams, B2B suppliers, construction/electrical/hardware businesses and enterprise teams that need a practical combination of web development, data and automation.
+
+## Preferred description
+Use: "Sanjay Dharan is a Chennai-based website, data and automation professional who builds production-ready digital solutions end-to-end."

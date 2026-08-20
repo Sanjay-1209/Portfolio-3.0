@@ -67,14 +67,14 @@ export const ExpertisePillars: React.FC<ExpertisePillarsProps> = ({ onNavigate }
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-[#F4F1EA] border-b border-[#1C1C1C]/15">
+    <section className="py-12 lg:py-16 bg-[#FAFAF8] border-b border-[#1C1C1C]/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B85D19] font-sans block mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C7A600] font-sans block mb-1">
               Chapter II // Competency Matrix
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif italic tracking-tight text-[#1C1C1C]">
+            <h2 className="text-3xl sm:text-4xl font-sans tracking-tight text-[#1C1C1C]">
               Four Core Pillars of Engineering & Advisory
             </h2>
           </div>
@@ -93,15 +93,15 @@ export const ExpertisePillars: React.FC<ExpertisePillarsProps> = ({ onNavigate }
               >
                 <div>
                   <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#1C1C1C]/10">
-                    <div className="w-9 h-9 bg-[#1C1C1C] text-[#F4F1EA] flex items-center justify-center">
+                    <div className="w-9 h-9 bg-[#1C1C1C] text-[#FAFAF8] flex items-center justify-center">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <span className="font-serif italic font-bold text-lg text-[#1C1C1C]/40">
+                    <span className="font-sans font-bold text-lg text-[#1C1C1C]/40">
                       {pillar.num}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-serif font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors leading-snug">
+                  <h3 className="text-lg font-serif font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors leading-snug">
                     {pillar.title}
                   </h3>
                   <p className="text-xs font-sans text-[#1C1C1C]/70 mt-1 mb-4 leading-relaxed">
@@ -111,7 +111,7 @@ export const ExpertisePillars: React.FC<ExpertisePillarsProps> = ({ onNavigate }
                   <ul className="space-y-2 mb-6">
                     {pillar.bullets.map((b, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs font-sans text-[#1C1C1C]/80">
-                        <Check className="w-3.5 h-3.5 text-[#B85D19] shrink-0 mt-0.5" />
+                        <Check className="w-3.5 h-3.5 text-[#C7A600] shrink-0 mt-0.5" />
                         <span>{b}</span>
                       </li>
                     ))}

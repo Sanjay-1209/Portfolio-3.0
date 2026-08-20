@@ -10,17 +10,21 @@ interface FeaturedProjectsProps {
 }
 
 export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, onOpenCaseStudy }) => {
-  const featured = PROJECTS.filter(p => p.featured).slice(0, 4);
+  const priorityIds = ['flora-farming', 'uyirveda-healthcare'];
+  const priority = priorityIds.map((id) => PROJECTS.find((p) => p.id === id)).filter(Boolean) as Project[];
+  const remaining = PROJECTS.filter((p) => p.featured && !priorityIds.includes(p.id));
+  const featured = [...priority, ...remaining].slice(0, 4);
+  const previewFor = (id: string) => id === 'flora-farming' ? '/assets/flora-preview.webp' : id === 'uyirveda-healthcare' ? '/assets/uyirveda-preview.webp' : id.includes('quotation') ? '/assets/automation-preview.webp' : null;
 
   return (
-    <section className="py-16 lg:py-24 bg-[#EBE7DE] border-b border-[#1C1C1C]/15">
+    <section className="py-12 lg:py-16 bg-[#FFF8DA] border-b border-[#1C1C1C]/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B85D19] font-sans block mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C7A600] font-sans block mb-1">
               Chapter V // Case Studies & Production Proof
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif italic tracking-tight text-[#1C1C1C]">
+            <h2 className="text-3xl sm:text-4xl font-sans tracking-tight text-[#1C1C1C]">
               Featured Projects & Deployments
             </h2>
             <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/70 mt-1 max-w-2xl">
@@ -40,11 +44,16 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, 
           {featured.map((project) => (
             <div
               key={project.id}
-              className="bg-white border border-[#1C1C1C]/15 p-6 sm:p-8 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
+              className="bg-white border border-black/10 rounded-2xl p-4 sm:p-5 hover:border-[#D2B100]/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
+                {previewFor(project.id) && (
+                  <div className="rounded-xl overflow-hidden border border-black/10 mb-4 bg-[#F4F4F1]">
+                    <img src={previewFor(project.id)!} alt={`${project.title} project preview`} loading="lazy" width="1000" height="620" className="w-full aspect-[16/8.5] object-cover transition-transform duration-500 group-hover:scale-[1.015]" />
+                  </div>
+                )}
                 <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-[#1C1C1C]/10">
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5 bg-[#F4F1EA] text-[#1C1C1C] border border-[#1C1C1C]/10">
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5 bg-[#FAFAF8] text-[#1C1C1C] border border-[#1C1C1C]/10">
                     {project.category}
                   </span>
                   <div className="flex items-center gap-2">
@@ -57,7 +66,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, 
                   </div>
                 </div>
 
-                <h3 className="text-xl font-serif italic font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors leading-snug">
+                <h3 className="text-xl font-sans font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors leading-snug">
                   {project.title}
                 </h3>
                 <p className="text-xs font-sans text-[#1C1C1C]/70 mt-2 leading-relaxed">
@@ -65,8 +74,8 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, 
                 </p>
 
                 {/* Impact highlights */}
-                <div className="mt-4 p-3.5 bg-[#F4F1EA] border border-[#1C1C1C]/10 space-y-1.5">
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#B85D19] block">
+                <div className="mt-4 p-3.5 bg-[#FAFAF8] border border-[#1C1C1C]/10 space-y-1.5">
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#C7A600] block">
                     Verified Outcomes:
                   </span>
                   {project.impact.slice(0, 2).map((imp, idx) => (
@@ -80,7 +89,7 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, 
                 {/* Tech tags */}
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {project.technologies.slice(0, 5).map((t, idx) => (
-                    <span key={idx} className="text-[10px] font-sans px-2 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] border border-[#1C1C1C]/10">
+                    <span key={idx} className="text-[10px] font-sans px-2 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] border border-[#1C1C1C]/10">
                       {t}
                     </span>
                   ))}
@@ -102,9 +111,9 @@ export const FeaturedProjects: React.FC<FeaturedProjectsProps> = ({ onNavigate, 
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-sans uppercase tracking-wider font-semibold px-3 py-1.5 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] flex items-center gap-1.5 transition-colors"
+                    className="text-xs font-sans uppercase tracking-wider font-semibold px-3 py-1.5 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] flex items-center gap-1.5 transition-colors"
                   >
-                    Visit Website <ExternalLink className="w-3 h-3 text-[#F4F1EA]" />
+                    Visit Website <ExternalLink className="w-3 h-3 text-[#FAFAF8]" />
                   </a>
                 ) : (
                   <span className="text-[10px] font-sans uppercase tracking-wider text-[#1C1C1C]/50">

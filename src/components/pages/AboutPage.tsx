@@ -33,14 +33,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
   ];
 
   return (
-    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="pt-24 sm:pt-28 pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       {/* Header Section */}
       <div className="max-w-3xl space-y-4 pb-8 border-b border-[#1C1C1C]/15">
-        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
-          <Sparkles className="w-3 h-3 text-[#B85D19]" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
+          <Sparkles className="w-3 h-3 text-[#C7A600]" />
           Dossier & Technical Philosophy
         </div>
-        <h1 className="text-4xl sm:text-6xl font-serif italic tracking-tight text-[#1C1C1C] leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl font-sans tracking-tight text-[#1C1C1C] leading-[1.05]">
           Bridging Commercial Questions, Data Architecture, and Automated Reality.
         </h1>
         <p className="text-base sm:text-lg font-serif text-[#1C1C1C]/80 leading-relaxed">
@@ -49,12 +49,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
       </div>
 
       {/* Deep Story & Philosophy Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: 7 Cols */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white border border-[#1C1C1C]/15 p-6 sm:p-8 space-y-4 text-xs sm:text-sm font-serif text-[#1C1C1C]/85 leading-relaxed shadow-sm">
-            <h2 className="text-2xl font-serif italic font-bold text-[#1C1C1C] pb-3 border-b border-[#1C1C1C]/10 flex items-center gap-2">
-              <Brain className="w-5 h-5 text-[#B85D19]" />
+          <div className="bg-white border border-[#1C1C1C]/15 p-6 sm:p-6 space-y-4 text-xs sm:text-sm font-serif text-[#1C1C1C]/85 leading-relaxed shadow-sm">
+            <h2 className="text-2xl font-sans font-bold text-[#1C1C1C] pb-3 border-b border-[#1C1C1C]/10 flex items-center gap-2">
+              <Brain className="w-5 h-5 text-[#C7A600]" />
               The Professional Journey
             </h2>
             <p>
@@ -73,7 +73,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
 
           {/* Core Principles */}
           <div className="space-y-4">
-            <h3 className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-[#B85D19] flex items-center gap-2">
+            <h3 className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-[#C7A600] flex items-center gap-2">
               <Compass className="w-3.5 h-3.5" />
               Four Core Working Principles
             </h3>
@@ -81,7 +81,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {principles.map((p, idx) => (
                 <div key={idx} className="p-5 bg-white border border-[#1C1C1C]/15 space-y-2 shadow-sm">
-                  <span className="text-xs font-serif italic font-bold text-[#B85D19]">{p.number}</span>
+                  <span className="text-xs font-sans font-bold text-[#C7A600]">{p.number}</span>
                   <h4 className="text-sm font-serif font-bold text-[#1C1C1C]">{p.title}</h4>
                   <p className="text-xs font-sans text-[#1C1C1C]/70 leading-relaxed">{p.description}</p>
                 </div>
@@ -96,13 +96,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
           <div className="bg-white border border-[#1C1C1C]/15 p-6 space-y-4 shadow-sm">
             <div className="flex items-center gap-2 pb-3 border-b border-[#1C1C1C]/10">
               <GraduationCap className="w-5 h-5 text-[#1C1C1C]" />
-              <h3 className="font-serif italic font-bold text-lg text-[#1C1C1C]">Formal Education</h3>
+              <h3 className="font-sans font-bold text-lg text-[#1C1C1C]">Formal Education</h3>
             </div>
 
             {EDUCATION.map((edu, idx) => (
               <div key={idx} className="space-y-2 font-sans">
                 <h4 className="font-bold text-sm text-[#1C1C1C]">{edu.degree}</h4>
-                <p className="text-xs text-[#B85D19] font-medium">{edu.institution}</p>
+                <p className="text-xs text-[#C7A600] font-medium">{edu.institution}</p>
                 <p className="text-xs text-[#1C1C1C]/60">{edu.university} • {edu.duration}</p>
                 
                 <div className="pt-2">
@@ -110,7 +110,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
                   <ul className="space-y-1 text-xs text-[#1C1C1C]/75">
                     {edu.coursework.map((c, cIdx) => (
                       <li key={cIdx} className="flex items-center gap-1.5">
-                        <span className="text-[#B85D19]">•</span> {c}
+                        <span className="text-[#C7A600]">•</span> {c}
                       </li>
                     ))}
                   </ul>
@@ -123,12 +123,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
           <div className="bg-white border border-[#1C1C1C]/15 p-6 space-y-4 shadow-sm">
             <div className="flex items-center gap-2 pb-3 border-b border-[#1C1C1C]/10">
               <Award className="w-5 h-5 text-[#1C1C1C]" />
-              <h3 className="font-serif italic font-bold text-lg text-[#1C1C1C]">Verified Certifications</h3>
+              <h3 className="font-sans font-bold text-lg text-[#1C1C1C]">Verified Certifications</h3>
             </div>
 
             <div className="space-y-2.5">
               {CERTIFICATIONS.map((cert, idx) => (
-                <div key={idx} className="p-3 bg-[#F4F1EA] border border-[#1C1C1C]/10 flex items-center justify-between font-sans">
+                <div key={idx} className="p-3 bg-[#FAFAF8] border border-[#1C1C1C]/10 flex items-center justify-between font-sans">
                   <div>
                     <h4 className="text-xs font-bold text-[#1C1C1C]">{cert.title}</h4>
                     <span className="text-[11px] text-[#1C1C1C]/60">{cert.issuer}</span>
@@ -142,22 +142,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenResume }
           </div>
 
           {/* Quick CTA Card */}
-          <div className="p-6 bg-[#1C1C1C] text-[#F4F1EA] border border-[#1C1C1C] space-y-4 shadow-sm">
-            <h4 className="text-lg font-serif italic text-[#F4F1EA]">Need Sanjay's verified dossier?</h4>
-            <p className="text-xs font-serif text-[#F4F1EA]/75 leading-relaxed">
+          <div className="p-6 bg-[#1C1C1C] text-[#FAFAF8] border border-[#1C1C1C] space-y-4 shadow-sm">
+            <h4 className="text-lg font-sans text-[#FAFAF8]">Need Sanjay's verified dossier?</h4>
+            <p className="text-xs font-serif text-[#FAFAF8]/75 leading-relaxed">
               You can view the complete verified resume or connect directly to discuss upcoming projects.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <button
                 onClick={onOpenResume}
-                className="px-3.5 py-2 text-xs font-sans font-bold uppercase tracking-wider bg-[#F4F1EA] text-[#1C1C1C] hover:bg-white transition-colors flex items-center gap-1"
+                className="px-3.5 py-2 text-xs font-sans font-bold uppercase tracking-wider bg-[#FAFAF8] text-[#1C1C1C] hover:bg-white transition-colors flex items-center gap-1"
               >
                 <FileText className="w-3.5 h-3.5" />
                 View Resume
               </button>
               <button
                 onClick={() => onNavigate('work-with-me')}
-                className="px-3.5 py-2 text-xs font-sans font-bold uppercase tracking-wider text-[#F4F1EA] bg-transparent hover:bg-white/10 border border-white/20 transition-colors"
+                className="px-3.5 py-2 text-xs font-sans font-bold uppercase tracking-wider text-[#FAFAF8] bg-transparent hover:bg-white/10 border border-white/20 transition-colors"
               >
                 Start a Project
               </button>

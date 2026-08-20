@@ -1,6 +1,7 @@
 import React from 'react';
 import { HeroSection } from '../home/HeroSection';
 import { CompaniesStrip } from '../home/CompaniesStrip';
+import { WebsiteStudioSpotlight } from '../home/WebsiteStudioSpotlight';
 import { ExpertisePillars } from '../home/ExpertisePillars';
 import { ProblemSolverCards } from '../home/ProblemSolverCards';
 import { FeaturedServices } from '../home/FeaturedServices';
@@ -34,35 +35,38 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 02 — Experience / Companies preview */}
       <CompaniesStrip onNavigate={onNavigate} />
 
-      {/* 03 — Core Expertise Matrix */}
+      {/* 03 — Priority Website Building Studio */}
+      <WebsiteStudioSpotlight onNavigate={onNavigate} onSelectService={onSelectService} />
+
+      {/* 04 — Core Expertise Matrix */}
       <ExpertisePillars onNavigate={onNavigate} />
 
-      {/* 04 — How I Help Businesses (Problem Solver Cards) */}
+      {/* 05 — How I Help Businesses (Problem Solver Cards) */}
       <ProblemSolverCards onNavigate={onNavigate} onSelectService={onSelectService} />
 
-      {/* 05 — Featured Services */}
+      {/* 06 — Featured Services */}
       <FeaturedServices onNavigate={onNavigate} onSelectService={onSelectService} />
 
-      {/* 06 — Selected Case Studies */}
+      {/* 07 — Selected Case Studies */}
       <FeaturedProjects onNavigate={onNavigate} onOpenCaseStudy={onOpenCaseStudy} />
 
-      {/* 07 — Live Interactive Quotation Tool Demonstration */}
-      <section className="py-16 lg:py-20 bg-[#0A0C10] border-t border-neutral-800/80">
+      {/* 08 — Live Interactive Quotation Tool Demonstration */}
+      <section className="py-12 lg:py-16 bg-[#0A0C10] border-t border-neutral-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <InteractiveQuotationPreview onNavigateToWorkWithMe={() => onNavigate('work-with-me')} />
         </div>
       </section>
 
-      {/* 08 — Featured Recommendations (EY, Tacheon, Hyundai) */}
+      {/* 09 — Featured Recommendations (EY, Tacheon, Hyundai) */}
       <FeaturedTestimonials onNavigate={onNavigate} />
 
-      {/* 09 — Why Work With Me (5 Pillars) */}
+      {/* 10 — Why Work With Me (5 Pillars) */}
       <WhyWorkWithMe onNavigate={onNavigate} />
 
-      {/* 10 — Technology Stack Matrix */}
+      {/* 11 — Technology Stack Matrix */}
       <TechStackPreview />
 
-      {/* 11 — Work With Me Conversion Banner */}
+      {/* 12 — Work With Me Conversion Banner */}
       <ConversionCTA onNavigate={onNavigate} />
     </div>
   );

@@ -4,13 +4,15 @@ import {
   Download, FileText, Calculator, ShieldCheck, Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { PERSONAL_INFO } from '../../data/portfolioData';
+import { PERSONAL_INFO, SERVICES } from '../../data/portfolioData';
 import { InquiryFormData } from '../../types';
 import { InteractiveQuotationPreview } from '../home/InteractiveQuotationPreview';
 
 interface WorkWithMePageProps {
   initialService?: string;
 }
+
+const SERVICE_OPTIONS = [...SERVICES.map((service) => service.title), 'Not Sure / Need Consultation'];
 
 export const WorkWithMePage: React.FC<WorkWithMePageProps> = ({ initialService }) => {
   const [formData, setFormData] = useState<InquiryFormData>({
@@ -19,7 +21,7 @@ export const WorkWithMePage: React.FC<WorkWithMePageProps> = ({ initialService }
     email: '',
     phone: '',
     industry: 'Technology / Software',
-    serviceRequired: initialService || 'Data Analytics',
+    serviceRequired: initialService || SERVICE_OPTIONS[0],
     timeline: 'Within 2–4 Weeks',
     currentProblem: '',
     expectedOutcome: '',
@@ -29,21 +31,8 @@ export const WorkWithMePage: React.FC<WorkWithMePageProps> = ({ initialService }
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState<'form' | 'estimator'>('form');
 
-  const servicesList = [
-    'Data Analytics',
-    'Dashboard Development',
-    'Data Automation',
-    'Data Engineering / ETL',
-    'Database Development',
-    'Web Development',
-    'Business Process Automation',
-    'Quotation Automation',
-    'Excel Automation',
-    'Reporting Automation',
-    'Custom Business Tool',
-    'Analytics / KPI Consultation',
-    'Not Sure / Need Consultation'
-  ];
+  const servicesList = SERVICE_OPTIONS;
+
 
   const industriesList = [
     'Technology / Software',
@@ -75,7 +64,7 @@ export const WorkWithMePage: React.FC<WorkWithMePageProps> = ({ initialService }
         particleCount: 70,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#1C1C1C', '#B85D19', '#F4F1EA', '#2D5A27']
+        colors: ['#1C1C1C', '#C7A600', '#FAFAF8', '#2D5A27']
       });
     } catch {
       // ignore
@@ -161,14 +150,14 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
   };
 
   return (
-    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-24 sm:pt-28 pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-9">
       {/* Header Section */}
       <div className="max-w-3xl space-y-4 pb-8 border-b border-[#1C1C1C]/15">
-        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
-          <Sparkles className="w-3 h-3 text-[#B85D19]" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
+          <Sparkles className="w-3 h-3 text-[#C7A600]" />
           Chapter V // Direct Engagement & Scoping
         </div>
-        <h1 className="text-4xl sm:text-6xl font-serif italic tracking-tight text-[#1C1C1C] leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl font-sans tracking-tight text-[#1C1C1C] leading-[1.05]">
           Have an Operational Problem? Let’s Solve It.
         </h1>
         <p className="text-base sm:text-lg font-serif text-[#1C1C1C]/80 leading-relaxed">
@@ -182,8 +171,8 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
           onClick={() => setActiveTab('form')}
           className={`px-4 py-2 text-xs font-sans uppercase tracking-wider font-bold transition-all flex items-center gap-2 ${
             activeTab === 'form'
-              ? 'bg-[#1C1C1C] text-[#F4F1EA] shadow-sm'
-              : 'bg-white text-[#1C1C1C] hover:bg-[#EBE7DE] border border-[#1C1C1C]/15'
+              ? 'bg-[#1C1C1C] text-[#FAFAF8] shadow-sm'
+              : 'bg-white text-[#1C1C1C] hover:bg-[#FFF8DA] border border-[#1C1C1C]/15'
           }`}
         >
           <FileText className="w-4 h-4" />
@@ -194,8 +183,8 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
           onClick={() => setActiveTab('estimator')}
           className={`px-4 py-2 text-xs font-sans uppercase tracking-wider font-bold transition-all flex items-center gap-2 ${
             activeTab === 'estimator'
-              ? 'bg-[#1C1C1C] text-[#F4F1EA] shadow-sm'
-              : 'bg-white text-[#1C1C1C] hover:bg-[#EBE7DE] border border-[#1C1C1C]/15'
+              ? 'bg-[#1C1C1C] text-[#FAFAF8] shadow-sm'
+              : 'bg-white text-[#1C1C1C] hover:bg-[#FFF8DA] border border-[#1C1C1C]/15'
           }`}
         >
           <Calculator className="w-4 h-4" />
@@ -214,7 +203,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                   {/* Name */}
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/70 mb-2">
-                      Your Full Name <span className="text-[#B85D19]">*</span>
+                      Your Full Name <span className="text-[#C7A600]">*</span>
                     </label>
                     <input
                       type="text"
@@ -222,7 +211,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                       value={formData.name}
                       onChange={(e) => handleChange('name', e.target.value)}
                       placeholder="e.g. Ramesh Sundaram"
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     />
                   </div>
 
@@ -236,7 +225,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                       value={formData.company}
                       onChange={(e) => handleChange('company', e.target.value)}
                       placeholder="e.g. Sundaram Electricals / Enterprise"
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     />
                   </div>
                 </div>
@@ -245,7 +234,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                   {/* Email */}
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/70 mb-2">
-                      Email Address <span className="text-[#B85D19]">*</span>
+                      Email Address <span className="text-[#C7A600]">*</span>
                     </label>
                     <input
                       type="email"
@@ -253,7 +242,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                       value={formData.email}
                       onChange={(e) => handleChange('email', e.target.value)}
                       placeholder="name@company.com"
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     />
                   </div>
 
@@ -267,7 +256,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                       value={formData.phone}
                       onChange={(e) => handleChange('phone', e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     />
                   </div>
                 </div>
@@ -281,7 +270,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     <select
                       value={formData.industry}
                       onChange={(e) => handleChange('industry', e.target.value)}
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     >
                       {industriesList.map((ind, i) => (
                         <option key={i} value={ind}>{ind}</option>
@@ -292,12 +281,12 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                   {/* Service Required Dropdown */}
                   <div>
                     <label className="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/70 mb-2">
-                      Service Required <span className="text-[#B85D19]">*</span>
+                      Service Required <span className="text-[#C7A600]">*</span>
                     </label>
                     <select
                       value={formData.serviceRequired}
                       onChange={(e) => handleChange('serviceRequired', e.target.value)}
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     >
                       {servicesList.map((s, i) => (
                         <option key={i} value={s}>{s}</option>
@@ -309,7 +298,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                 {/* Current Problem */}
                 <div>
                   <label className="block text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/70 mb-2">
-                    What is your current operational bottleneck? <span className="text-[#B85D19]">*</span>
+                    What is your current operational bottleneck? <span className="text-[#C7A600]">*</span>
                   </label>
                   <textarea
                     required
@@ -317,7 +306,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     value={formData.currentProblem}
                     onChange={(e) => handleChange('currentProblem', e.target.value)}
                     placeholder="e.g. We spend 15 hours every week combining 6 branch Excel files, or we need an automated quotation system for 200 hardware items..."
-                    className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                    className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                   />
                 </div>
 
@@ -331,7 +320,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     value={formData.expectedOutcome}
                     onChange={(e) => handleChange('expectedOutcome', e.target.value)}
                     placeholder="e.g. Automated daily email PDF reports before 8:00 AM, or an executive Tableau dashboard..."
-                    className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                    className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                   />
                 </div>
 
@@ -344,7 +333,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     <select
                       value={formData.timeline}
                       onChange={(e) => handleChange('timeline', e.target.value)}
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     >
                       <option value="Urgent (Within 1-2 Weeks)">Urgent (Within 1-2 Weeks)</option>
                       <option value="Within 2–4 Weeks">Within 2–4 Weeks</option>
@@ -361,7 +350,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     <select
                       value={formData.preferredContactMethod}
                       onChange={(e) => handleChange('preferredContactMethod', e.target.value as any)}
-                      className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                      className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-3 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
                     >
                       <option value="Email">Email</option>
                       <option value="WhatsApp">WhatsApp</option>
@@ -374,9 +363,9 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                 {/* Submit Action */}
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
+                  className="w-full py-4 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
                 >
-                  <Send className="w-4 h-4 text-[#F4F1EA]" />
+                  <Send className="w-4 h-4 text-[#FAFAF8]" />
                   Submit Project Brief & Generate Transmission
                 </button>
               </form>
@@ -388,7 +377,7 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-3xl font-serif italic text-[#1C1C1C]">Project Brief Formatted Successfully</h3>
+                  <h3 className="text-3xl font-sans text-[#1C1C1C]">Project Brief Formatted Successfully</h3>
                   <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/80 max-w-md mx-auto">
                     Thank you, <strong className="text-[#1C1C1C]">{formData.name}</strong>. Choose your preferred channel to transmit this brief to Sanjay:
                   </p>
@@ -398,9 +387,9 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto pt-2">
                   <a
                     href={generateMailtoUrl()}
-                    className="p-4 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider transition-colors shadow-sm"
+                    className="p-4 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider transition-colors shadow-sm"
                   >
-                    <Mail className="w-4 h-4 text-[#F4F1EA]" />
+                    <Mail className="w-4 h-4 text-[#FAFAF8]" />
                     Send via Email Draft
                   </a>
 
@@ -408,9 +397,9 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                     href={generateWhatsAppUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 bg-[#2D5A27] hover:bg-[#23471e] text-[#F4F1EA] flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider transition-colors shadow-sm"
+                    className="p-4 bg-[#2D5A27] hover:bg-[#23471e] text-[#FAFAF8] flex items-center justify-center gap-2 text-xs font-sans font-bold uppercase tracking-wider transition-colors shadow-sm"
                   >
-                    <MessageSquare className="w-4 h-4 text-[#F4F1EA]" />
+                    <MessageSquare className="w-4 h-4 text-[#FAFAF8]" />
                     Send on WhatsApp
                   </a>
                 </div>
@@ -418,9 +407,9 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
                 <div className="pt-2">
                   <button
                     onClick={handleDownloadBrief}
-                    className="px-5 py-2.5 bg-[#F4F1EA] hover:bg-[#EBE7DE] text-[#1C1C1C] text-xs font-sans font-semibold uppercase tracking-wider inline-flex items-center gap-2 border border-[#1C1C1C]/15"
+                    className="px-5 py-2.5 bg-[#FAFAF8] hover:bg-[#FFF8DA] text-[#1C1C1C] text-xs font-sans font-semibold uppercase tracking-wider inline-flex items-center gap-2 border border-[#1C1C1C]/15"
                   >
-                    <Download className="w-4 h-4 text-[#B85D19]" />
+                    <Download className="w-4 h-4 text-[#C7A600]" />
                     Download Project Brief (.txt)
                   </button>
                 </div>
@@ -440,29 +429,29 @@ LinkedIn: ${PERSONAL_INFO.linkedinUrl}
           {/* Right Column: Direct Info & Trust Pillars (4 Cols) */}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white border border-[#1C1C1C]/15 p-6 space-y-4 shadow-sm">
-              <h3 className="font-serif italic font-bold text-lg text-[#1C1C1C] flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#B85D19]" />
+              <h3 className="font-sans font-bold text-lg text-[#1C1C1C] flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#C7A600]" />
                 Direct Contact
               </h3>
               
               <ul className="space-y-3 text-xs font-sans text-[#1C1C1C]/80">
                 <li className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#B85D19] shrink-0" />
+                  <Mail className="w-4 h-4 text-[#C7A600] shrink-0" />
                   <span className="truncate">{PERSONAL_INFO.email}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#B85D19] shrink-0" />
+                  <Phone className="w-4 h-4 text-[#C7A600] shrink-0" />
                   <span>{PERSONAL_INFO.phone}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <MessageSquare className="w-4 h-4 text-[#B85D19] shrink-0" />
+                  <MessageSquare className="w-4 h-4 text-[#C7A600] shrink-0" />
                   <span>WhatsApp direct for urgent triage</span>
                 </li>
               </ul>
             </div>
 
             <div className="bg-white border border-[#1C1C1C]/15 p-6 space-y-3 shadow-sm">
-              <h4 className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#B85D19]">
+              <h4 className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#C7A600]">
                 Engagement Protocol
               </h4>
               <ul className="space-y-2 text-xs font-sans text-[#1C1C1C]/80">

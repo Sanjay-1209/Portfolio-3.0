@@ -1,6 +1,11 @@
 {
-  "name": "Sanjay Dharan | Data, Automation & Consulting",
-  "description": "Professional portfolio, data engineering, analytics, automation, and consulting services website for Sanjay Dharan.",
+  "name": "Sanjay Dharan | Website Development, Data & Automation",
+  "description": "Production-ready professional portfolio and consulting website for Sanjay Dharan, focused on responsive web development, data analytics, data engineering and business automation.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "RESPONSIVE_WEB_PORTFOLIO",
+    "STATIC_PORTFOLIO_ASSISTANT",
+    "SEO_AND_STRUCTURED_DATA",
+    "DATA_AND_AUTOMATION_SERVICES"
+  ]
 }

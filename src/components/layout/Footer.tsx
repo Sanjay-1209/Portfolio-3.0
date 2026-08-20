@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResume }) => {
   };
 
   return (
-    <footer className="bg-[#EBE7DE] border-t border-[#1C1C1C]/20 text-[#1C1C1C] pt-16 pb-12">
+    <footer className="bg-[#FFF8DA] border-t border-[#1C1C1C]/20 text-[#1C1C1C] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Masthead Row */}
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResume }) => {
             <span className="text-[10px] uppercase tracking-[0.3em] font-sans text-[#1C1C1C]/60 block mb-1">
               Vol. 2026 // Technical Portfolio & Advisory
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif italic tracking-tight font-light text-[#1C1C1C]">
+            <h2 className="text-3xl sm:text-4xl font-sans tracking-tight font-light text-[#1C1C1C]">
               Sanjay Dharan
             </h2>
           </div>
@@ -41,11 +41,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResume }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 py-12 border-b border-[#1C1C1C]/15">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6 py-12 border-b border-[#1C1C1C]/15">
           {/* Col 1 & 2: Positioning */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 bg-[#1C1C1C] flex items-center justify-center font-bold text-[#F4F1EA] font-serif text-xs">
+              <div className="w-7 h-7 bg-[#1C1C1C] flex items-center justify-center font-bold text-[#FAFAF8] font-serif text-xs">
                 SD
               </div>
               <span className="font-sans font-bold text-xs uppercase tracking-[0.2em] text-[#1C1C1C]">
@@ -137,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResume }) => {
               <li className="pt-2">
                 <button
                   onClick={() => handleNav('work-with-me')}
-                  className="w-full py-2 px-3 text-[11px] uppercase tracking-[0.15em] font-bold bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] flex items-center justify-center gap-1.5 transition-colors"
+                  className="w-full py-2 px-3 text-[11px] uppercase tracking-[0.15em] font-bold bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   Work With Me

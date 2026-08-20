@@ -4,13 +4,13 @@ import { Code } from 'lucide-react';
 
 export const TechStackPreview: React.FC = () => {
   return (
-    <section className="py-16 lg:py-20 bg-[#F4F1EA] border-b border-[#1C1C1C]/15">
+    <section className="py-12 lg:py-16 bg-[#FAFAF8] border-b border-[#1C1C1C]/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B85D19] font-sans block mb-1">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C7A600] font-sans block mb-1">
             Chapter VIII // Technical Index
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif italic tracking-tight text-[#1C1C1C]">
+          <h2 className="text-3xl sm:text-4xl font-sans tracking-tight text-[#1C1C1C]">
             Technical Stack & Ecosystem
           </h2>
           <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/70 mt-2">
@@ -37,8 +37,8 @@ export const TechStackPreview: React.FC = () => {
                     key={sIdx}
                     className={`text-xs font-sans px-2.5 py-1 transition-colors ${
                       s.highlight
-                        ? 'bg-[#1C1C1C] text-[#F4F1EA] font-semibold'
-                        : 'bg-[#F4F1EA] text-[#1C1C1C] border border-[#1C1C1C]/10'
+                        ? 'bg-[#1C1C1C] text-[#FAFAF8] font-semibold'
+                        : 'bg-[#FAFAF8] text-[#1C1C1C] border border-[#1C1C1C]/10'
                     }`}
                   >
                     {s.name}

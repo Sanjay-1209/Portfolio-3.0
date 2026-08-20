@@ -24,14 +24,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
   const cleanPhone = PERSONAL_INFO.phone.replace(/[^0-9]/g, '');
 
   return (
-    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="pt-24 sm:pt-28 pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       {/* Header Section */}
       <div className="max-w-3xl space-y-4 pb-8 border-b border-[#1C1C1C]/15">
-        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
-          <Mail className="w-3 h-3 text-[#B85D19]" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
+          <Mail className="w-3 h-3 text-[#C7A600]" />
           Direct Dispatch & Inquiries
         </div>
-        <h1 className="text-4xl sm:text-6xl font-serif italic tracking-tight text-[#1C1C1C] leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl font-sans tracking-tight text-[#1C1C1C] leading-[1.05]">
           Let’s Discuss Your Next Initiative
         </h1>
         <p className="text-base sm:text-lg font-serif text-[#1C1C1C]/80 leading-relaxed">
@@ -49,16 +49,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
               className="p-6 bg-white border border-[#1C1C1C]/15 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
-                <div className="w-8 h-8 bg-[#1C1C1C] text-[#F4F1EA] flex items-center justify-center mb-3">
+                <div className="w-8 h-8 bg-[#1C1C1C] text-[#FAFAF8] flex items-center justify-center mb-3">
                   <Mail className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/60 block mb-1">Direct Email</span>
-                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors break-all">
+                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors break-all">
                   {PERSONAL_INFO.email}
                 </h3>
               </div>
               <span className="text-xs font-sans text-[#1C1C1C]/60 mt-4 flex items-center gap-1">
-                Open in mail client <ExternalLink className="w-3 h-3 text-[#B85D19]" />
+                Open in mail client <ExternalLink className="w-3 h-3 text-[#C7A600]" />
               </span>
             </a>
 
@@ -68,16 +68,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
               className="p-6 bg-white border border-[#1C1C1C]/15 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
-                <div className="w-8 h-8 bg-[#1C1C1C] text-[#F4F1EA] flex items-center justify-center mb-3">
+                <div className="w-8 h-8 bg-[#1C1C1C] text-[#FAFAF8] flex items-center justify-center mb-3">
                   <Phone className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/60 block mb-1">Direct Phone</span>
-                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors">
+                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors">
                   {PERSONAL_INFO.phone}
                 </h3>
               </div>
               <span className="text-xs font-sans text-[#1C1C1C]/60 mt-4 flex items-center gap-1">
-                Call directly <ExternalLink className="w-3 h-3 text-[#B85D19]" />
+                Call directly <ExternalLink className="w-3 h-3 text-[#C7A600]" />
               </span>
             </a>
 
@@ -89,16 +89,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
               className="p-6 bg-white border border-[#1C1C1C]/15 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
-                <div className="w-8 h-8 bg-[#1C1C1C] text-[#F4F1EA] flex items-center justify-center mb-3">
+                <div className="w-8 h-8 bg-[#1C1C1C] text-[#FAFAF8] flex items-center justify-center mb-3">
                   <ExternalLink className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/60 block mb-1">LinkedIn Network</span>
-                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors">
+                <h3 className="text-sm font-sans font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors">
                   sanjay-dharan-99736321b
                 </h3>
               </div>
               <span className="text-xs font-sans text-[#1C1C1C]/60 mt-4 flex items-center gap-1">
-                View verified profile <ExternalLink className="w-3 h-3 text-[#B85D19]" />
+                View verified profile <ExternalLink className="w-3 h-3 text-[#C7A600]" />
               </span>
             </a>
 
@@ -110,7 +110,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
               className="p-6 bg-white border border-[#1C1C1C]/15 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
-                <div className="w-8 h-8 bg-[#2D5A27] text-[#F4F1EA] flex items-center justify-center mb-3">
+                <div className="w-8 h-8 bg-[#2D5A27] text-[#FAFAF8] flex items-center justify-center mb-3">
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#2D5A27] block mb-1">WhatsApp Chat</span>
@@ -127,7 +127,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
           {/* Location & Resume Banner */}
           <div className="p-6 bg-white border border-[#1C1C1C]/15 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-[#1C1C1C] text-[#F4F1EA] flex items-center justify-center">
+              <div className="w-8 h-8 bg-[#1C1C1C] text-[#FAFAF8] flex items-center justify-center">
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
@@ -138,19 +138,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
 
             <button
               onClick={onOpenResume}
-              className="px-4 py-2 bg-[#F4F1EA] hover:bg-[#EBE7DE] text-[#1C1C1C] text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2 border border-[#1C1C1C]/15 transition-colors"
+              className="px-4 py-2 bg-[#FAFAF8] hover:bg-[#FFF8DA] text-[#1C1C1C] text-xs font-sans font-bold uppercase tracking-wider flex items-center gap-2 border border-[#1C1C1C]/15 transition-colors"
             >
-              <FileText className="w-4 h-4 text-[#B85D19]" />
+              <FileText className="w-4 h-4 text-[#C7A600]" />
               View Resume
             </button>
           </div>
         </div>
 
         {/* Right Column: Quick Direct Message Form (5 Cols) */}
-        <div className="lg:col-span-5 bg-white border border-[#1C1C1C]/15 p-6 sm:p-8 space-y-4 shadow-sm">
+        <div className="lg:col-span-5 bg-white border border-[#1C1C1C]/15 p-6 sm:p-6 space-y-4 shadow-sm">
           <div className="space-y-1 pb-3 border-b border-[#1C1C1C]/10">
-            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.25em] text-[#B85D19]">Fast Dispatch</span>
-            <h3 className="text-2xl font-serif italic text-[#1C1C1C]">Send a Direct Message</h3>
+            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.25em] text-[#C7A600]">Fast Dispatch</span>
+            <h3 className="text-2xl font-sans text-[#1C1C1C]">Send a Direct Message</h3>
             <p className="text-xs font-serif text-[#1C1C1C]/70 leading-relaxed">
               Have a quick inquiry? Prepare an immediate email draft below.
             </p>
@@ -167,7 +167,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
                 value={quickName}
                 onChange={(e) => setQuickName(e.target.value)}
                 placeholder="Your name or company..."
-                className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-2.5 text-xs text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-2.5 text-xs text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
               />
             </div>
 
@@ -181,15 +181,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onOpenResu
                 value={quickMsg}
                 onChange={(e) => setQuickMsg(e.target.value)}
                 placeholder="What can I help you with?"
-                className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-2.5 text-xs text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
+                className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/20 px-4 py-2.5 text-xs text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
+              className="w-full py-3 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
             >
-              {sent ? <Check className="w-4 h-4 text-[#F4F1EA]" /> : <Send className="w-4 h-4 text-[#F4F1EA]" />}
+              {sent ? <Check className="w-4 h-4 text-[#FAFAF8]" /> : <Send className="w-4 h-4 text-[#FAFAF8]" />}
               {sent ? 'Opening Mail Client...' : 'Dispatch Message Directly'}
             </button>
           </form>

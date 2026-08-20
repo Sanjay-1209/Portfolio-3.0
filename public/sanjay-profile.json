@@ -1,0 +1,17 @@
+{
+  "name": "Sanjay Dharan",
+  "canonicalUrl": "https://sanjay-dharan.netlify.app/",
+  "location": "Chennai, Tamil Nadu, India",
+  "roles": ["Website Developer", "Data Analyst", "Data Engineer", "Automation Specialist", "Business Intelligence Professional"],
+  "summary": "Website, data and automation professional with 2+ years of production experience building responsive websites, dashboards, data pipelines and business automation systems.",
+  "priorityService": {
+    "name": "End-to-End Responsive Web Development",
+    "capabilities": ["information architecture", "mobile-first UI/UX", "React", "TypeScript", "SEO", "performance optimization", "lead capture", "QA", "deployment"]
+  },
+  "liveWebsites": [
+    {"name":"Flora Farming","url":"https://www.florafarming.in/"},
+    {"name":"Uyirveda Health Care","url":"https://uyirveda.in/"}
+  ],
+  "experienceBrands": ["EY GDS", "Tacheon", "Hyundai"],
+  "contact": {"email":"sanjaydharand@gmail.com","linkedin":"https://www.linkedin.com/in/sanjay-dharan-99736321b/"}
+}

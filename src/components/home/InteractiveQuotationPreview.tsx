@@ -66,7 +66,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
         particleCount: 40,
         spread: 50,
         origin: { y: 0.8 },
-        colors: ['#1C1C1C', '#B85D19', '#8C7E6A']
+        colors: ['#1C1C1C', '#C7A600', '#78736A']
       });
     } catch {
       // ignore
@@ -74,18 +74,18 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
   };
 
   return (
-    <div className="bg-white border border-[#1C1C1C]/15 p-6 sm:p-8 lg:p-10 shadow-sm relative overflow-hidden">
+    <div className="bg-white border border-black/10 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm relative overflow-hidden">
       <div className="relative z-10">
         <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 pb-6 border-b border-[#1C1C1C]/15">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 bg-[#F4F1EA] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-widest border border-[#1C1C1C]/10 flex items-center gap-1.5">
-                <Sparkles className="w-3 h-3 text-[#B85D19]" />
+              <span className="px-2.5 py-0.5 bg-[#FAFAF8] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-widest border border-[#1C1C1C]/10 flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-[#C7A600]" />
                 Live Interactive Instrument
               </span>
               <span className="text-[10px] text-[#1C1C1C]/60 font-sans uppercase tracking-wider hidden sm:inline">Module #09 in Practice</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-serif italic tracking-tight text-[#1C1C1C] mt-2">
+            <h3 className="text-2xl sm:text-3xl font-sans tracking-tight text-[#1C1C1C] mt-2">
               Automated Quotation & B2B Commercial Engine
             </h3>
             <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/70 mt-1 max-w-2xl">
@@ -94,7 +94,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono text-[#1C1C1C]/70 bg-[#F4F1EA] px-3 py-1.5 border border-[#1C1C1C]/10">
+            <span className="text-[11px] font-mono text-[#1C1C1C]/70 bg-[#FAFAF8] px-3 py-1.5 border border-[#1C1C1C]/10">
               Ref: <strong className="text-[#1C1C1C]">SD-QT-{new Date().getFullYear()}-042</strong>
             </span>
           </div>
@@ -112,7 +112,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/20 px-4 py-2 text-sm text-[#1C1C1C] font-sans focus:outline-none focus:border-[#1C1C1C]"
+                className="w-full rounded-xl bg-[#FAFAF8] border border-black/12 px-4 py-2.5 text-sm text-[#1C1C1C] font-sans focus:outline-none focus:border-[#C7A600]"
                 placeholder="Enter client company name..."
               />
             </div>
@@ -125,17 +125,44 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                   <button
                     key={i}
                     onClick={() => addItem(tpl)}
-                    className="text-xs font-sans px-3 py-1 bg-[#F4F1EA] hover:bg-[#EBE7DE] border border-[#1C1C1C]/15 text-[#1C1C1C] flex items-center gap-1.5 transition-colors"
+                    className="text-xs font-sans px-3 py-1 bg-[#FAFAF8] hover:bg-[#FFF8DA] border border-[#1C1C1C]/15 text-[#1C1C1C] flex items-center gap-1.5 transition-colors"
                   >
-                    <Plus className="w-3 h-3 text-[#B85D19]" />
+                    <Plus className="w-3 h-3 text-[#C7A600]" />
                     {tpl.name}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Line Items Table */}
-            <div className="overflow-x-auto">
+            {/* Mobile line-item cards: intentionally redesigned instead of forcing a wide desktop table onto phones */}
+            <div className="sm:hidden space-y-2.5">
+              {items.map((item, itemIndex) => (
+                <div key={item.id} className="rounded-xl border border-black/10 bg-[#FAFAF8] p-3 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[9px] font-sans font-extrabold uppercase tracking-[.14em] text-black/45">Line item {itemIndex + 1}</span>
+                    <button onClick={() => removeItem(item.id)} disabled={items.length <= 1} className="p-1 text-black/35 hover:text-red-700 disabled:opacity-20" aria-label="Remove line item"><Trash2 className="w-3.5 h-3.5" /></button>
+                  </div>
+                  <input type="text" value={item.description} onChange={(e) => updateItem(item.id, 'description', e.target.value)} className="w-full rounded-lg bg-white border border-black/10 px-3 py-2 text-xs font-sans" aria-label="Deliverable description" />
+                  <div className="grid grid-cols-3 gap-2">
+                    <label className="text-[9px] font-sans font-bold text-black/45">Rate
+                      <input type="number" value={item.unitPrice} onChange={(e) => updateItem(item.id, 'unitPrice', Number(e.target.value))} className="mt-1 w-full rounded-lg bg-white border border-black/10 px-2 py-2 text-[11px] text-black font-mono" />
+                    </label>
+                    <label className="text-[9px] font-sans font-bold text-black/45">Qty
+                      <input type="number" min="1" value={item.qty} onChange={(e) => updateItem(item.id, 'qty', Math.max(1, Number(e.target.value)))} className="mt-1 w-full rounded-lg bg-white border border-black/10 px-2 py-2 text-[11px] text-black text-center font-mono" />
+                    </label>
+                    <label className="text-[9px] font-sans font-bold text-black/45">GST
+                      <select value={item.gstRate} onChange={(e) => updateItem(item.id, 'gstRate', Number(e.target.value))} className="mt-1 w-full rounded-lg bg-white border border-black/10 px-1 py-2 text-[11px] text-black text-center font-mono">
+                        <option value="0">0%</option><option value="5">5%</option><option value="12">12%</option><option value="18">18%</option><option value="28">28%</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div className="flex justify-between items-center pt-1 border-t border-black/8"><span className="text-[9px] font-sans font-bold uppercase tracking-wider text-black/40">Amount</span><span className="font-mono text-xs font-bold">₹{(item.unitPrice * item.qty).toLocaleString('en-IN')}</span></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop / tablet line-item table */}
+            <div className="overflow-x-auto hidden sm:block">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr className="border-b border-[#1C1C1C]/15 text-[#1C1C1C]/60 font-sans uppercase tracking-wider text-[10px]">
@@ -149,7 +176,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                 </thead>
                 <tbody className="divide-y divide-[#1C1C1C]/10 font-sans">
                   {items.map((item) => (
-                    <tr key={item.id} className="hover:bg-[#F4F1EA]/50">
+                    <tr key={item.id} className="hover:bg-[#FAFAF8]/50">
                       <td className="py-2.5 px-2">
                         <input
                           type="text"
@@ -163,7 +190,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                           type="number"
                           value={item.unitPrice}
                           onChange={(e) => updateItem(item.id, 'unitPrice', Number(e.target.value))}
-                          className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/15 px-2 py-1 text-[#1C1C1C] font-mono text-xs"
+                          className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/15 px-2 py-1 text-[#1C1C1C] font-mono text-xs"
                         />
                       </td>
                       <td className="py-2.5 px-2">
@@ -172,14 +199,14 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                           min="1"
                           value={item.qty}
                           onChange={(e) => updateItem(item.id, 'qty', Math.max(1, Number(e.target.value)))}
-                          className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/15 px-2 py-1 text-[#1C1C1C] text-center font-mono text-xs"
+                          className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/15 px-2 py-1 text-[#1C1C1C] text-center font-mono text-xs"
                         />
                       </td>
                       <td className="py-2.5 px-2">
                         <select
                           value={item.gstRate}
                           onChange={(e) => updateItem(item.id, 'gstRate', Number(e.target.value))}
-                          className="w-full bg-[#F4F1EA] border border-[#1C1C1C]/15 px-1 py-1 text-[#1C1C1C] text-center font-mono text-xs"
+                          className="w-full bg-[#FAFAF8] border border-[#1C1C1C]/15 px-1 py-1 text-[#1C1C1C] text-center font-mono text-xs"
                         >
                           <option value="0">0%</option>
                           <option value="5">5%</option>
@@ -217,7 +244,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
           </div>
 
           {/* Calculation summary card */}
-          <div className="bg-[#EBE7DE] border border-[#1C1C1C]/15 p-5 flex flex-col justify-between space-y-4 shadow-sm">
+          <div className="bg-[#FFF8DA] border border-[#1C1C1C]/15 p-5 flex flex-col justify-between space-y-4 shadow-sm">
             <div className="space-y-3">
               <div className="flex items-center justify-between border-b border-[#1C1C1C]/15 pb-2">
                 <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#1C1C1C]">Financial Ledger</span>
@@ -258,7 +285,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
 
                 <div className="pt-2 border-t border-[#1C1C1C]/15 flex justify-between items-baseline">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#1C1C1C]">Grand Total:</span>
-                  <span className="text-xl font-serif italic font-bold text-[#1C1C1C]">
+                  <span className="text-xl font-sans font-bold text-[#1C1C1C]">
                     ₹{Math.round(grandTotal).toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -268,7 +295,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
             <div className="space-y-2 pt-2">
               <button
                 onClick={handleGenerateQuote}
-                className="w-full py-3 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
+                className="w-full py-3 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] font-sans font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 <Calculator className="w-4 h-4" />
                 {isGenerated ? 'Recalculate & Validate Proposal' : 'Generate Formal Proposal'}
@@ -287,7 +314,7 @@ export const InteractiveQuotationPreview: React.FC<{ onNavigateToWorkWithMe?: ()
                       onClick={onNavigateToWorkWithMe}
                       className="mt-2 text-xs font-sans uppercase tracking-wider font-bold text-[#1C1C1C] hover:underline flex items-center justify-center gap-1 mx-auto"
                     >
-                      Discuss Your Custom Tool Requirement <ArrowRight className="w-3 h-3 text-[#B85D19]" />
+                      Discuss Your Custom Tool Requirement <ArrowRight className="w-3 h-3 text-[#C7A600]" />
                     </button>
                   )}
                 </div>

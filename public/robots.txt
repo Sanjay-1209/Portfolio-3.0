@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://sanjay-dharan.netlify.app/sitemap.xml
+
+# AI-readable public portfolio summaries
+# /llms.txt
+# /sanjay-profile.json

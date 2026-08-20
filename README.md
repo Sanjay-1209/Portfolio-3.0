@@ -1,20 +1,53 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Sanjay Dharan — Professional Portfolio
 
-# Run and deploy your AI Studio app
+Production-ready React + TypeScript portfolio focused on **website development, data analytics, data engineering and business automation**.
 
-This contains everything you need to run your app locally.
+## Highlights
 
-View your app in AI Studio: https://ai.studio/apps/4f68350d-0dc7-423d-831f-a1ba8e88353c
+- Website Development is positioned as a priority commercial service.
+- Live website case studies: Flora Farming and Uyirveda Health Care.
+- Responsive premium white / black / grey / yellow visual system.
+- Compact mobile-first layouts and navigation.
+- Static **Ask Sanjay** portfolio assistant with curated answers, a short thinking state and progressive typing. It does **not** use Gemini, OpenAI, or any external AI API.
+- Search/AI discoverability: semantic metadata, JSON-LD, real route URLs, `robots.txt`, `sitemap.xml`, `llms.txt`, and `sanjay-profile.json`.
+- Netlify SPA route fallback and production security/cache headers.
+- Local optimized WebP project preview assets.
 
-## Run Locally
+## Run locally
 
-**Prerequisites:**  Node.js
+Prerequisite: Node.js 20+ (Node 22 recommended).
 
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Open `http://localhost:3000`.
+
+## Validate and build
+
+```bash
+npm run lint
+npm run build
+```
+
+The production build is written to `dist/`.
+
+## Netlify deployment
+
+The included `netlify.toml` runs `npm run build`, publishes `dist`, and routes page URLs such as `/services` and `/projects` back to the React application.
+
+## SEO / AI-readable endpoints
+
+After deployment:
+
+- `/robots.txt`
+- `/sitemap.xml`
+- `/llms.txt`
+- `/sanjay-profile.json`
+
+These files are intentionally public and summarize the same portfolio information shown on the website.
+
+## Portfolio assistant
+
+`src/components/assistant/PortfolioAssistant.tsx` contains the question bank and answers. Add new questions there as new projects or services launch. Because the assistant is deterministic, it has no API cost and cannot invent facts outside the curated portfolio answers.

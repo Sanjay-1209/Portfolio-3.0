@@ -14,25 +14,26 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
 
   const categories = [
     'All',
+    'Web & Digital Solutions',
     'Analytics & BI',
     'Data Engineering & Pipelines',
-    'Web & Digital Solutions',
     'Automation & Tools'
   ];
 
-  const filteredProjects = selectedCategory === 'All'
-    ? PROJECTS
-    : PROJECTS.filter(p => p.category === selectedCategory);
+  const projectPriority = (project: Project) => project.id === 'flora-farming' ? 0 : project.id === 'uyirveda-healthcare' ? 1 : project.category === 'Web & Digital Solutions' ? 2 : 3;
+  const filteredProjects = (selectedCategory === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === selectedCategory))
+    .slice().sort((a, b) => projectPriority(a) - projectPriority(b));
+  const previewFor = (id: string) => id === 'flora-farming' ? '/assets/flora-preview.webp' : id === 'uyirveda-healthcare' ? '/assets/uyirveda-preview.webp' : id.includes('quotation') ? '/assets/automation-preview.webp' : null;
 
   return (
-    <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="pt-24 sm:pt-28 pb-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-9">
       {/* Header Section */}
       <div className="max-w-3xl space-y-4 pb-8 border-b border-[#1C1C1C]/15">
-        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
-          <Layers className="w-3 h-3 text-[#B85D19]" />
+        <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] text-[10px] font-sans font-bold uppercase tracking-[0.25em] border border-[#1C1C1C]/10">
+          <Layers className="w-3 h-3 text-[#C7A600]" />
           Chapter II // Applied Implementations
         </div>
-        <h1 className="text-4xl sm:text-6xl font-serif italic tracking-tight text-[#1C1C1C] leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl font-sans tracking-tight text-[#1C1C1C] leading-[1.05]">
           Case Studies, Automated Systems & Live Platforms
         </h1>
         <p className="text-base sm:text-lg font-serif text-[#1C1C1C]/80 leading-relaxed">
@@ -43,7 +44,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
       {/* Category Filter Pills */}
       <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-[#1C1C1C]/15">
         <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#1C1C1C]/60 mr-2 flex items-center gap-1">
-          <Filter className="w-3.5 h-3.5 text-[#B85D19]" /> Filter:
+          <Filter className="w-3.5 h-3.5 text-[#C7A600]" /> Filter:
         </span>
         {categories.map((cat) => (
           <button
@@ -51,8 +52,8 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
             onClick={() => setSelectedCategory(cat)}
             className={`px-3.5 py-1.5 text-xs font-sans uppercase tracking-wider transition-all ${
               selectedCategory === cat
-                ? 'bg-[#1C1C1C] text-[#F4F1EA] font-bold shadow-sm'
-                : 'bg-white text-[#1C1C1C] hover:bg-[#EBE7DE] border border-[#1C1C1C]/15'
+                ? 'bg-[#1C1C1C] text-[#FAFAF8] font-bold shadow-sm'
+                : 'bg-white text-[#1C1C1C] hover:bg-[#FFF8DA] border border-[#1C1C1C]/15'
             }`}
           >
             {cat} {cat === 'All' ? `(${PROJECTS.length})` : ''}
@@ -61,15 +62,20 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className="bg-white border border-[#1C1C1C]/15 p-6 sm:p-8 hover:border-[#1C1C1C]/50 transition-all flex flex-col justify-between group shadow-sm"
+            className="bg-white border border-black/10 rounded-2xl p-4 sm:p-5 hover:border-[#D2B100]/50 transition-all flex flex-col justify-between group shadow-sm"
           >
             <div>
+              {previewFor(project.id) && (
+                <div className="rounded-xl overflow-hidden border border-black/10 mb-4 bg-[#F4F4F1]">
+                  <img src={previewFor(project.id)!} alt={`${project.title} project preview`} loading="lazy" width="1000" height="620" className="w-full aspect-[16/8.5] object-cover transition-transform duration-500 group-hover:scale-[1.015]" />
+                </div>
+              )}
               <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-[#1C1C1C]/10">
-                <span className="text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5 bg-[#F4F1EA] text-[#1C1C1C] border border-[#1C1C1C]/10">
+                <span className="text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5 bg-[#FAFAF8] text-[#1C1C1C] border border-[#1C1C1C]/10">
                   {project.category}
                 </span>
                 <div className="flex items-center gap-2">
@@ -82,7 +88,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
                 </div>
               </div>
 
-              <h2 className="text-2xl font-serif italic font-bold text-[#1C1C1C] group-hover:text-[#B85D19] transition-colors leading-snug">
+              <h2 className="text-2xl font-sans font-bold text-[#1C1C1C] group-hover:text-[#C7A600] transition-colors leading-snug">
                 {project.title}
               </h2>
               
@@ -92,15 +98,15 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
 
               {/* Problem vs Solution preview */}
               <div className="grid grid-cols-1 gap-3 mt-4 text-xs">
-                <div className="p-3 bg-[#EBE7DE] border border-[#1C1C1C]/10">
+                <div className="p-3 bg-[#FFF8DA] border border-[#1C1C1C]/10">
                   <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C]/70 block mb-1">
                     Problem Encountered
                   </span>
                   <p className="text-xs font-serif text-[#1C1C1C]/85 line-clamp-2 leading-relaxed">{project.problem}</p>
                 </div>
 
-                <div className="p-3 bg-[#F4F1EA] border border-[#1C1C1C]/10">
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#B85D19] block mb-1">
+                <div className="p-3 bg-[#FAFAF8] border border-[#1C1C1C]/10">
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#C7A600] block mb-1">
                     Architectural Solution & Execution
                   </span>
                   <p className="text-xs font-serif text-[#1C1C1C]/85 line-clamp-2 leading-relaxed">{project.solution}</p>
@@ -108,7 +114,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
               </div>
 
               {/* Impact summary */}
-              <div className="mt-4 p-3.5 bg-[#F4F1EA] border border-[#1C1C1C]/10 space-y-1.5">
+              <div className="mt-4 p-3.5 bg-[#FAFAF8] border border-[#1C1C1C]/10 space-y-1.5">
                 <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#1C1C1C] block">
                   Verified Outcomes:
                 </span>
@@ -123,7 +129,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
               {/* Tech Stack */}
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {project.technologies.map((t, idx) => (
-                  <span key={idx} className="text-[10px] font-sans px-2.5 py-0.5 bg-[#EBE7DE] text-[#1C1C1C] border border-[#1C1C1C]/10">
+                  <span key={idx} className="text-[10px] font-sans px-2.5 py-0.5 bg-[#FFF8DA] text-[#1C1C1C] border border-[#1C1C1C]/10">
                     {t}
                   </span>
                 ))}
@@ -145,7 +151,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-sans uppercase tracking-wider font-bold px-3.5 py-1.5 bg-[#1C1C1C] hover:bg-[#333333] text-[#F4F1EA] flex items-center gap-1.5 transition-colors shadow-sm"
+                  className="text-xs font-sans uppercase tracking-wider font-bold px-3.5 py-1.5 bg-[#1C1C1C] hover:bg-[#333333] text-[#FAFAF8] flex items-center gap-1.5 transition-colors shadow-sm"
                 >
                   Visit Platform <ExternalLink className="w-3.5 h-3.5" />
                 </a>
@@ -160,14 +166,14 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate, onOpenCa
       </div>
 
       {/* CTA Box */}
-      <div className="p-8 bg-[#1C1C1C] text-[#F4F1EA] border border-[#1C1C1C] text-center space-y-4 shadow-sm">
-        <h3 className="text-2xl font-serif italic text-[#F4F1EA]">Need a Similar Engineered Solution?</h3>
-        <p className="text-xs sm:text-sm font-serif text-[#F4F1EA]/80 max-w-xl mx-auto">
+      <div className="p-8 bg-[#1C1C1C] text-[#FAFAF8] border border-[#1C1C1C] text-center space-y-4 shadow-sm">
+        <h3 className="text-2xl font-sans text-[#FAFAF8]">Need a Similar Engineered Solution?</h3>
+        <p className="text-xs sm:text-sm font-serif text-[#FAFAF8]/80 max-w-xl mx-auto">
           Whether you need an automated quotation engine, statistical models on customer cohorts, or a full-stack platform.
         </p>
         <button
           onClick={() => onNavigate('work-with-me')}
-          className="px-6 py-3 bg-[#F4F1EA] hover:bg-white text-[#1C1C1C] font-sans font-bold text-xs uppercase tracking-widest inline-flex items-center gap-2 transition-all shadow-sm"
+          className="px-6 py-3 bg-[#FAFAF8] hover:bg-white text-[#1C1C1C] font-sans font-bold text-xs uppercase tracking-widest inline-flex items-center gap-2 transition-all shadow-sm"
         >
           <Sparkles className="w-4 h-4" />
           Request a Custom Consultation / Quote

@@ -1,0 +1,7 @@
+# AI-readable portfolio entry point
+
+Primary summary: /llms.txt
+Machine-readable facts: /sanjay-profile.json
+Canonical website: https://sanjay-dharan.netlify.app/
+
+Sanjay Dharan is a Chennai-based Website Developer, Data Analyst, Data Engineer and Automation Specialist. Website development is a priority commercial service, backed by live production examples including Flora Farming and Uyirveda Health Care.

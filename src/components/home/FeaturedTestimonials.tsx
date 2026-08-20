@@ -17,14 +17,14 @@ export const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({ onNa
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-[#F4F1EA] border-b border-[#1C1C1C]/15">
+    <section className="py-12 lg:py-16 bg-[#FAFAF8] border-b border-[#1C1C1C]/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#B85D19] font-sans block mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C7A600] font-sans block mb-1">
               Chapter VI // Letters of Endorsement
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif italic tracking-tight text-[#1C1C1C]">
+            <h2 className="text-3xl sm:text-4xl font-sans tracking-tight text-[#1C1C1C]">
               Colleague & Lead Recommendations
             </h2>
             <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/70 mt-1 max-w-2xl">
@@ -35,7 +35,7 @@ export const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({ onNa
           <div className="flex items-center gap-3">
             <button
               onClick={() => onNavigate('recommendations')}
-              className="text-xs font-sans uppercase tracking-wider font-bold text-[#F4F1EA] bg-[#1C1C1C] hover:bg-[#333333] px-4 py-2.5 flex items-center gap-1.5 transition-all shadow-sm"
+              className="text-xs font-sans uppercase tracking-wider font-bold text-[#FAFAF8] bg-[#1C1C1C] hover:bg-[#333333] px-4 py-2.5 flex items-center gap-1.5 transition-all shadow-sm"
             >
               All 5 Recommendations <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -55,13 +55,13 @@ export const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({ onNa
                   <span className="text-[10px] font-mono text-[#1C1C1C]/60">{rec.date}</span>
                 </div>
 
-                <Quote className="w-5 h-5 text-[#B85D19]/60 mb-2" />
+                <Quote className="w-5 h-5 text-[#C7A600]/60 mb-2" />
 
                 <p className="text-xs sm:text-sm font-serif text-[#1C1C1C]/85 italic leading-relaxed line-clamp-6">
                   "{rec.quote}"
                 </p>
 
-                <div className="mt-3 p-2.5 bg-[#F4F1EA] border border-[#1C1C1C]/10 text-xs font-serif italic text-[#B85D19] font-medium">
+                <div className="mt-3 p-2.5 bg-[#FAFAF8] border border-[#1C1C1C]/10 text-xs font-sans text-[#C7A600] font-medium">
                   "{rec.highlightPhrase}"
                 </div>
               </div>
@@ -76,7 +76,7 @@ export const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({ onNa
                   className="border-[#1C1C1C]/20"
                 />
                 <div className="min-w-0 flex-1">
-                  <h4 className="text-xs font-sans font-bold text-[#1C1C1C] truncate group-hover:text-[#B85D19] transition-colors">
+                  <h4 className="text-xs font-sans font-bold text-[#1C1C1C] truncate group-hover:text-[#C7A600] transition-colors">
                     {rec.name}
                   </h4>
                   <p className="text-[11px] font-sans text-[#1C1C1C]/70 truncate">{rec.role}</p>
@@ -95,7 +95,7 @@ export const FeaturedTestimonials: React.FC<FeaturedTestimonialsProps> = ({ onNa
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs font-sans uppercase tracking-wider font-bold text-[#1C1C1C] hover:underline"
           >
-            Verify endorsements directly on LinkedIn Profile <ExternalLink className="w-3.5 h-3.5 text-[#B85D19]" />
+            Verify endorsements directly on LinkedIn Profile <ExternalLink className="w-3.5 h-3.5 text-[#C7A600]" />
           </a>
         </div>
       </div>

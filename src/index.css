@@ -2,94 +2,69 @@
 
 @layer base {
   :root {
-    --font-serif: 'Newsreader', 'Playfair Display', Georgia, serif;
-    --font-display: 'Playfair Display', 'Newsreader', Georgia, serif;
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    
-    --bg-parchment: #F4F1EA;
+    --bg-parchment: #FAFAF8;
     --bg-card: #FFFFFF;
-    --bg-card-warm: #EBE7DE;
-    --text-ink: #1C1C1C;
-    --color-accent: #B85D19;
-    --color-ochre: #8C7E6A;
+    --bg-card-warm: #FFF8DA;
+    --text-ink: #171717;
+    --color-accent: #C7A600;
+    --color-ochre: #78736A;
   }
 
+  html { background: #FAFAF8; scroll-padding-top: 76px; }
   body {
-    font-family: var(--font-serif);
-    background-color: var(--bg-parchment);
-    color: var(--text-ink);
+    margin: 0;
+    font-family: var(--font-sans);
+    background: #FAFAF8;
+    color: #171717;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.035em;
   }
 
-  .font-sans {
-    font-family: var(--font-sans);
-  }
+  .font-sans, .font-serif { font-family: var(--font-sans); }
+  .font-mono { font-family: var(--font-mono); }
 
-  .font-serif {
-    font-family: var(--font-serif);
-  }
-
-  .font-mono {
-    font-family: var(--font-mono);
+  button, a { -webkit-tap-highlight-color: transparent; }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 3px solid rgba(255, 216, 77, .65);
+    outline-offset: 2px;
   }
 }
 
-/* Custom subtle scrollbar in warm parchment */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #F0F0ED; }
+::-webkit-scrollbar-thumb { background: #C6C6C0; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #6D6D69; }
 
-::-webkit-scrollbar-track {
-  background: #EBE7DE;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #C8C2B5;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1C1C1C;
-}
-
-/* Editorial Card & Paper Styles */
 .editorial-card {
   background: #FFFFFF;
-  border: 1px solid rgba(28, 28, 28, 0.12);
-  transition: all 0.25s ease-in-out;
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  border-radius: 16px;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.editorial-card:hover { transform: translateY(-2px); border-color: rgba(199,166,0,.5); box-shadow: 0 14px 36px rgba(17,17,17,.07); }
+.editorial-card-warm { background: #FFF8DA; border: 1px solid rgba(199,166,0,.18); border-radius: 16px; }
+.editorial-badge { background: #FFF8DA; color: #171717; border: 1px solid rgba(199,166,0,.22); border-radius: 999px; }
+.editorial-rule { height: 1px; background: rgba(17,17,17,.10); }
+
+/* Premium compact responsive tuning */
+@media (max-width: 767px) {
+  h1 { text-wrap: balance; }
+  h2, h3 { text-wrap: pretty; }
+  section { scroll-margin-top: 68px; }
+  .max-w-7xl { max-width: 100%; }
 }
 
-.editorial-card:hover {
-  border-color: rgba(28, 28, 28, 0.35);
-  box-shadow: 0 10px 25px -5px rgba(28, 28, 28, 0.05);
-}
-
-.editorial-card-warm {
-  background: #EBE7DE;
-  border: 1px solid rgba(28, 28, 28, 0.12);
-  transition: all 0.25s ease-in-out;
-}
-
-.editorial-card-warm:hover {
-  border-color: rgba(28, 28, 28, 0.35);
-}
-
-/* Editorial badge */
-.editorial-badge {
-  background: #EBE7DE;
-  color: #1C1C1C;
-  border: 1px solid rgba(28, 28, 28, 0.18);
-}
-
-/* Editorial divider line */
-.editorial-rule {
-  height: 1px;
-  background: rgba(28, 28, 28, 0.12);
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

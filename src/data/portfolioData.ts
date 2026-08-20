@@ -3,13 +3,13 @@ import { Experience, Project, Recommendation, Service, SkillCategory, EducationI
 export const PERSONAL_INFO = {
   name: 'Sanjay Dharan',
   titles: [
+    'Website Developer & Digital Solutions',
     'Data Analyst',
     'Data Engineer',
     'Automation Specialist',
-    'Business Intelligence',
-    'Web Developer'
+    'Business Intelligence'
   ],
-  headline: 'Turning raw business data and repetitive processes into dashboards, automated workflows, scalable systems, and better business decisions.',
+  headline: 'Building premium responsive websites, dashboards, automated workflows, scalable data systems, and practical digital solutions for real business outcomes.',
   location: 'Chennai, Tamil Nadu, India',
   phone: '+91 93607 34551',
   phoneFormatted: '+91 93607 34551',
